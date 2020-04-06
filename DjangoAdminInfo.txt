@@ -1,0 +1,5 @@
+Here's what I did to create a super user for the gofundapi superuser:
+python manage.py createsuperuser
+
+username: group1-4admin
+password: YMCA4ymca4
