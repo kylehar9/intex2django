@@ -21,5 +21,5 @@ from api.views import testInputView, resultsView # import view here  routes star
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    url(r'results/', resultsView, name='resultsView'),
+    # url(r'results/', resultsView, name='resultsView'),
 ]

@@ -7,7 +7,7 @@
 <h1> This is the input view </h1>
 <h1> </h1>
 <!-- action should be the url path to the view that renders the template displaying the results -->
-<form action="/results/" method="POST" >
+<form action="/api/results/" method="POST" >
 {% csrf_token %}
   Category ID:<br>
   <input type="text" name="category_id"><br>
