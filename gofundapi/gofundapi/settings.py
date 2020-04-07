@@ -57,7 +57,7 @@ ROOT_URLCONF = 'gofundapi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),], # add this line here to tell it where to look for templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

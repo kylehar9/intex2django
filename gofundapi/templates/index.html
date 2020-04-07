@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+</head>
+<body>
+<h1> This is the input view </h1>
+<h1> </h1>
+<!-- action should be the url path to the view that renders the template displaying the results -->
+<form action="/results/" method="POST" >
+{% csrf_token %}
+  Goal:<br>
+  <input type="text" name="goal"><br>
+  Donators:<br>
+  <input type="text" name="donators"><br>
+  <input type="submit" name="Submit">
+  </formmethod="post">
+</body>
+</html>
