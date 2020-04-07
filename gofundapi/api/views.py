@@ -35,8 +35,9 @@ def resultsView(request):
                     "input1":
                     {
                         # Test 2:
-                        "ColumnNames": ["goal", "donators"],
-                        "Values": [[ request.POST['goal'], request.POST['donators']]]
+                        "ColumnNames": ["category_id", "currencycode", "current_amount", "goal", "days_active", "title", "description", "has_beneficiary", "visible_in_search", "is_charity"],
+                        "Values": [[ request.POST['category_id'], request.POST['currencycode'], 0, request.POST['goal'], request.POST['days_active'], request.POST['title'], request.POST['description'], request.POST['has_beneficiary'], request.POST['visible_in_search'], request.POST['is_charity']]]
+                        # "Values": [[ request.POST['goal'], request.POST['donators']]]
                         
                         # Potentially to-use
                         # "ColumnNames": ["campaign_id", "auto_fb_post_mode", "category_id", "currencycode","current_amount", "goal", "donators", "days_active", "title", "description", "has_beneficiary", "visible_in_search", "state", "campaign_hearts", "is_charity",  "velocity"]
@@ -54,8 +55,8 @@ def resultsView(request):
 
     # the API call
     body = str.encode(json.dumps(data))
-    url = 'https://ussouthcentral.services.azureml.net/workspaces/d7228c50e6944ea1ae1a4cd5d0f15842/services/205123d7d79e4a50a54bd34e8223ec64/execute?api-version=2.0&details=true'
-    api_key = 'EkmuoRn91nvFmaarKlvnD1z/9QItF7le8Jn+Z6nLRZxDi6qEXiZcGvx/sYu9RMGKMkC4nAqDYd/OuWi+l38sag=='
+    url = 'https://ussouthcentral.services.azureml.net/workspaces/d7228c50e6944ea1ae1a4cd5d0f15842/services/8ced6f993d1844969db2a8780205da0a/execute?api-version=2.0&details=true'
+    api_key = 'htxCbkeJVyLGBy7LKOVzm+JQLZaY3RQHsAGkw/gNS+9/hJanTtBZqgZWe5xYpMgfDP4TD6ScZzrayUNeoppIjw=='
     # Replace my url and api_key with your own values
     headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
@@ -71,7 +72,7 @@ def resultsView(request):
     result = response.read()
     result = json.loads(result) # turns bits into json object
     #******** Need this line********
-    result = result["Results"]["output1"]["value"]["Values"][0][2] 
+    result = result["Results"]["output1"]["value"]["Values"][0][13]
     #********************************
     # azure send the response as a weird result object. It would be wise to postman to find the 
     # path to the response var value

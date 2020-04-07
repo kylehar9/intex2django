@@ -9,10 +9,28 @@
 <!-- action should be the url path to the view that renders the template displaying the results -->
 <form action="/results/" method="POST" >
 {% csrf_token %}
+  Category ID:<br>
+  <input type="text" name="category_id"><br>
+  Currency Code:<br>
+  <input type="text" name="currencycode"><br>
+  <!-- Current Amount:<br> -->
+  <!-- <input type="text" name="current_amount"><br> -->
   Goal:<br>
   <input type="text" name="goal"><br>
-  Donators:<br>
-  <input type="text" name="donators"><br>
+  Days Active:<br>
+  <input type="text" name="days_active"><br>
+  Title:<br>
+  <input type="text" name="title"><br>
+  Description:<br>
+  <input type="text" name="description"><br>
+  Has Beneficiary:<br>
+  <input type="text" name="has_beneficiary"><br>
+  Visible In Search:<br>
+  <input type="text" name="visible_in_search"><br>
+  Is Charity:<br>
+  <input type="text" name="is_charity"><br>  
+
+  
   <input type="submit" name="Submit">
   </formmethod="post">
 </body>
