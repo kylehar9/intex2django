@@ -34,7 +34,7 @@ class AzureCall(APIView):
                         {
                             # Test 4:
                             "ColumnNames": ["category_id", "currencycode", "current_amount", "goal", "days_active", "title", "description", "has_beneficiary", "visible_in_search", "is_charity"],
-                            "Values": [[ formObject['category_id'], formObject['currencycode'], formObject['current_amount'], formObject['goal'], formObject['days_active'], formObject['title'], formObject['description'], formObject['has_beneficiary'], formObject['visible_in_search'], formObject['is_charity']]]
+                            "Values": [[ formObject['category_id'], formObject['currencycode'], 0, formObject['goal'], formObject['days_active'], formObject['title'], formObject['description'], formObject['has_beneficiary'], formObject['visible_in_search'], formObject['is_charity']]]
                         }, 
                     },
                     "GlobalParameters": {
