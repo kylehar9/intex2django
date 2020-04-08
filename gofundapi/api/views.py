@@ -97,7 +97,7 @@ class CampaignSearch(APIView):
             # goal_amount = searchParams['goal']
             for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE goal = %s', [searchParams['goal']]):
                 # mysearch.append(c.campaign_id) # For an array
-                mysearch[c.campaign_id] = c.goal # For an object
+                mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
 
             # mysearch= str.encode(json.dumps(mysearch))
             # mysearch = response.read()
@@ -110,7 +110,10 @@ class CampaignSearch(APIView):
             # print(searchParams['goal_max'], searchParams['goal_min'])
             for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE goal < %s AND goal > %s', [searchParams['goal_max'], searchParams['goal_min']]):
                 # Load each Campaign into the Response that lies in this goal range
-                mysearch[c.campaign_id] = c.goal # For an object
+                mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
+                # mysearch[c.campaign_id] = [c.campaign_id, c.title, c.goal, c.donators, c.current_amount, c.currencycode, c.campaign_hearts, c.days_active] # For an array
+                # mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal}
+                # mysearch.append(c.campaign_id)
 
         #********************************************************
         #**************Search a title ***************************
@@ -118,7 +121,7 @@ class CampaignSearch(APIView):
         elif searchParams['title']:
             for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE title LIKE %s', ['%' + searchParams['title'] + '%']):
                 # mysearch.append(c.campaign_id) # For an array
-                mysearch[c.campaign_id] = c.title # For an object
+                mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
 
         else:
             print("Made it to else")
