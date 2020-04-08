@@ -80,6 +80,12 @@ class CampaignSearch(APIView):
         mysearch = {}
         # mysearch = [] # As an array
 
+        # order_value = '' # Use later for ORDER BY, if specified
+
+        # if searchParams['order_by']:
+        #     order_value = searchParams['order_by']
+        
+
         #********************************************************
         #**************Search a specific goal amount*************
         #********************************************************
@@ -119,7 +125,10 @@ class CampaignSearch(APIView):
         #**************Search a title ***************************
         #********************************************************
         elif searchParams['title']:
-            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE title LIKE %s', ['%' + searchParams['title'] + '%']):
+
+            like_value = '%' + searchParams['title'] + '%' # This will query the DB if a title contains this text, so it becomes %text% 
+
+            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE title LIKE %s', [like_value]):
                 # mysearch.append(c.campaign_id) # For an array
                 mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
 
