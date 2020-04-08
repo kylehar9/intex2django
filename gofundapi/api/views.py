@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
-from api.models import Campaign
+from gofundapi.api.models import Campaign
 import urllib
 import json 
 

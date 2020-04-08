@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'corsheaders',
-    'api'
+    'gofundapi.api'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'gofundapi.urls'
+ROOT_URLCONF = 'gofundapi.gofundapi.urls'
 
 CORS_ORIGIN_ALLOW_ALL = True
 

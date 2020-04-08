@@ -16,10 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
-from api.views import testInputView # import view here  routes start with the app not project name
+from gofundapi.api.views import testInputView # import view here  routes start with the app not project name
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
+    path('api/', include('gofundapi.api.urls')),
     # url(r'results/', resultsView, name='resultsView'),
 ]
