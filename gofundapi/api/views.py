@@ -1,7 +1,10 @@
 from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from rest_framework.response import Response
+from django.views.decorators.csrf import csrf_exempt
+import urllib
+import json 
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
@@ -10,14 +13,14 @@ def testInputView(request):
 # this view will pull up the submit html template
         return render(request, "index.html", {})
 
+@csrf_exempt
 def resultsView(request):
+    
 # this view receives parameters from the submit html template and calls the API in azure
 # this contains API code for Python and Python3 
 
     # If you are using Python 3+, import urllib instead of urllib2
-    #import urllib2.request
-    import urllib
-    import json     
+    #import urllib2.request    
     
     # formatting the data into a data object for the API call
     data =  {
