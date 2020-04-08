@@ -76,11 +76,15 @@ class CampaignSearch(APIView):
         request = json.dumps(request.data) # Converts request.data from weirdness into a json string
         searchParams = (json.loads(request)) # Converts json-like string to Python object
         
-        if searchParams['goal'] is not None:
+        # We use one of these to load up the result variable to be sent in the Response
+        mysearch = {}
+        # mysearch = [] # As an array
 
-            #********************************************************
-            #**************Search a specific goal amount*************
-            #********************************************************
+        #********************************************************
+        #**************Search a specific goal amount*************
+        #********************************************************
+        if searchParams['goal']:
+
             # print("Here is request.smthg:")
             # print(request.data)
             # print("Here it is after json.dumps():")
@@ -89,23 +93,32 @@ class CampaignSearch(APIView):
             print(searchParams)
 
 
-            # We use these to load up the result variable to be sent in the Response
-            mysearch = {}
-            # mysearch = [] # As an array
 
-            goal_amount = searchParams['goal']
             # goal_amount = searchParams['goal']
-            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE goal = %s', [goal_amount]):
+            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE goal = %s', [searchParams['goal']]):
                 # mysearch.append(c.campaign_id) # For an array
                 mysearch[c.campaign_id] = c.goal # For an object
 
             # mysearch= str.encode(json.dumps(mysearch))
             # mysearch = response.read()
             # mysearch = json.loads(mysearch)
-        elif searchParams['goal_max'] is not None:
+
+        #********************************************************
+        #**************Search a goal range **********************
+        #********************************************************
+        elif searchParams['goal_max'] and searchParams['goal_min']:
             # print(searchParams['goal_max'], searchParams['goal_min'])
-            print(searchParams['goal_max'])
-            print(searchParams['goal_min'])
+            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE goal < %s AND goal > %s', [searchParams['goal_max'], searchParams['goal_min']]):
+                # Load each Campaign into the Response that lies in this goal range
+                mysearch[c.campaign_id] = c.goal # For an object
+
+        #********************************************************
+        #**************Search a title ***************************
+        #********************************************************
+        elif searchParams['title']:
+            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE title LIKE %s', ['%' + searchParams['title'] + '%']):
+                # mysearch.append(c.campaign_id) # For an array
+                mysearch[c.campaign_id] = c.title # For an object
 
         else:
             print("Made it to else")
