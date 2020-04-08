@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
-from api.views import testInputView, resultsView # import view here  routes start with the app not project name
+from api.views import testInputView # import view here  routes start with the app not project name
 
 urlpatterns = [
     path('admin/', admin.site.urls),
