@@ -16,6 +16,7 @@ def testInputView(request):
 class AzureCall(APIView):
     @csrf_exempt
     def post(self, request, format=None):
+        print(request)
         
     # this view receives parameters from the submit html template and calls the API in azure
     # this contains API code for Python and Python3 
@@ -30,7 +31,7 @@ class AzureCall(APIView):
                         {
                             # Test 4:
                             "ColumnNames": ["category_id", "currencycode", "current_amount", "goal", "days_active", "title", "description", "has_beneficiary", "visible_in_search", "is_charity"],
-                            "Values": [[ request.POST['category_id'], request.POST['currencycode'], 0, request.POST['goal'], request.POST['days_active'], request.POST['title'], request.POST['description'], request.POST['has_beneficiary'], request.POST['visible_in_search'], request.POST['is_charity']]]
+                            "Values": [[ request.POST['category_id'], request.POST['currencycode'], request.POST.get('current_amount', 0), request.POST['goal'], request.POST['days_active'], request.POST['title'], request.POST['description'], request.POST['has_beneficiary'], request.POST['visible_in_search'], request.POST['is_charity']]]
                         }, 
                     },
                     "GlobalParameters": {
