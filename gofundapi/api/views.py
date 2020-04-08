@@ -19,7 +19,7 @@ class AzureCall(APIView):
     def post(self, request, format=None):
         # body1 = json.loads(request.body)
         # print(body1)
-        # body = json.loads(request)
+        formObject = json.loads(request.body)
         
     # this view receives parameters from the submit html template and calls the API in azure
     # this contains API code for Python and Python3 
@@ -34,7 +34,7 @@ class AzureCall(APIView):
                         {
                             # Test 4:
                             "ColumnNames": ["category_id", "currencycode", "current_amount", "goal", "days_active", "title", "description", "has_beneficiary", "visible_in_search", "is_charity"],
-                            "Values": [[ request.POST['category_id'], request.POST['currencycode'], request.POST['current_amount'], request.POST['goal'], request.POST['days_active'], request.POST['title'], request.POST['description'], request.POST['has_beneficiary'], request.POST['visible_in_search'], request.POST['is_charity']]]
+                            "Values": [[ formObject['category_id'], formObject['currencycode'], formObject['current_amount'], formObject['goal'], formObject['days_active'], formObject['title'], formObject['description'], formObject['has_beneficiary'], formObject['visible_in_search'], formObject['is_charity']]]
                         }, 
                     },
                     "GlobalParameters": {
