@@ -16,8 +16,9 @@ def testInputView(request):
 class AzureCall(APIView):
     @csrf_exempt
     def post(self, request, format=None):
-        body1 = json.loads(request.body)
-        print(body1)
+        # body1 = json.loads(request.body)
+        # print(body1)
+        # body = json.loads(request)
         
     # this view receives parameters from the submit html template and calls the API in azure
     # this contains API code for Python and Python3 
