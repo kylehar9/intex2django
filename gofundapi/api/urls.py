@@ -9,6 +9,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('test', views.testInputView, name='testInputView'),
     path('results', views.AzureCall.as_view()),
+    path('search', views.CampaignSearch.as_view()),
     # url(r'results/', resultsView, name='resultsView'),
 ]
 

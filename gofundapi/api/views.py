@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
+from api.models import Campaign
 import urllib
 import json 
 
@@ -68,33 +69,33 @@ class AzureCall(APIView):
         # return render(request, "results.html", {"result": result}) # this path assumes that this file is in the root directory in a folder named templates
         # the third parameter sends the result (the response variable value) to the template to be rendered
 
+class CampaignSearch(APIView):
+    @csrf_exempt
+    def get(self, request, format=None):
 
-        # class CreateSale(APIView):
-        # '''Creates a sale, including getting a payment intent from Stripe'''
-        # @csrf_exempt
-        # def post(self, request, format=None):
-        #     body = json.loads(request.body)
+        # print("Here is request.smthg:")
+        # print(request.data)
+        print("Here it is after json.dumps():")
+        print(json.dumps(request.data))
 
-        #     print(body)
+        request = json.dumps(request.data) # Converts request.data from weirdness into a json string
+        searchParams = (json.loads(request)) # Converts json-like string to Python object
 
-        #     sale = Sale()
-        #     sale.name = body['name']
-        #     sale.address1 = body['address1']
-        #     sale.address2 = body['address2']
-        #     sale.city = body['city']
-        #     sale.state = body['state']
-        #     sale.zipcode = body['zipcode']
-        #     sale.total = body['total']
-        #     sale.items = body['items']
-        #     sale.payment_intent = stripe.PaymentIntent.create(
-        #         amount=int(sale.total * 100),
-        #         currency = 'usd',
-        #     )
+        # We use these to load up the result variable to be sent in the Response
+        mysearch = {}
+        # mysearch = [] # As an array
 
-        #     sale.save()
+        goal_amount = searchParams['goal']
+        # goal_amount = searchParams['goal']
+        for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE goal = %s', [goal_amount]):
+            # mysearch.append(c.campaign_id) # For an array
+            mysearch[c.campaign_id] = c.goal # For an object
 
-        #     return Response({
-        #         'sale_id': sale.id, # Make sure you have called sale.save() or it'll be empty
-        #         'client_secret': sale.payment_intent['client_secret'],
-        #         'name': sale.name,
-        #     })
+        # mysearch= str.encode(json.dumps(mysearch))
+        # mysearch = response.read()
+        # mysearch = json.loads(mysearch)
+
+        
+
+
+        return Response({"my_search": mysearch})
