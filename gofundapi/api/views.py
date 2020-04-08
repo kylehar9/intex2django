@@ -13,6 +13,7 @@ def index(request):
 def testInputView(request):
 # this view will pull up the submit html template
         return render(request, "index.html", {})
+
 class AzureCall(APIView):
     @csrf_exempt
     def post(self, request, format=None):
