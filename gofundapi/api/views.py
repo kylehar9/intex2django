@@ -41,7 +41,7 @@ class OneCampaign(APIView):
             "is_launched": theCampaign.is_launched,
             "campaign_hearts": theCampaign.campaign_hearts,
             "social_share_total": theCampaign.social_share_total,
-            "is_charity": theCampaign.is_charity
+            "is_charity": theCampaign.is_charity,
             "campaign_image_url": theCampaign.campaign_image_url
         }
 
