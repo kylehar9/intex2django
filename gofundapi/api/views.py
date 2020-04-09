@@ -107,20 +107,21 @@ class CampaignSearch(APIView):
     @csrf_exempt
     def post(self, request, format=None):
 
-        # request = json.dumps(request.data) # Converts request.data from weirdness into a json string
-        # searchParams = (json.loads(request)) # Converts json-like string to Python object
-        searchParams = (json.loads(request.body)) # For Ty
+        request = json.dumps(request.data) # Converts request.data from weirdness into a json string
+        searchParams = (json.loads(request)) # Converts json-like string to Python object
+        # searchParams = (json.loads(request.body)) # For Ty
         
         # We use one of these to load up the result variable to be sent in the Response
         mysearch = {}
         # mysearch = [] # As an array
 
-        order_by = ''
-
         # order_value = '' # Use later for ORDER BY, if specified
 
         # if searchParams['order_by']:
         #     order_value = searchParams['order_by']
+
+        if not searchParams['asc_desc']:
+            searchParams['asc_desc'] = 'DESC'
         
 
         #********************************************************
@@ -212,17 +213,19 @@ class CampaignSearch(APIView):
         #********************************************************
         elif searchParams['currencycode']:
 
-            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE currencycode = %s', [searchParams['currencycode']]):
-                # mysearch.append(c.campaign_id) # For an array
-                mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
-
-            order_by = 'currencycode'
+            if searchParams['order_by']:
+                for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE currencycode = %s ORDER BY {} {}'.format(searchParams['order_by'], searchParams['asc_desc']), [searchParams['currencycode']]):                    
+                    mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
+            else:
+                for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE currencycode = %s', [searchParams['currencycode']]):
+                    # mysearch.append(c.campaign_id) # For an array
+                    mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
 
         else:
             print("Made it to else")
 
-        # if searchParams['lets_search'] and order_by:
-        #     print("Hello mai fren")
+        
+            
 
 
 
