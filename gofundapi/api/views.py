@@ -216,7 +216,7 @@ class CampaignSearch(APIView):
                 # mysearch.append(c.campaign_id) # For an array
                 mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
 
-        order_by = 'currencycode'
+            order_by = 'currencycode'
 
         else:
             print("Made it to else")
