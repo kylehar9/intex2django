@@ -107,8 +107,8 @@ class CampaignSearch(APIView):
     def post(self, request, format=None):
 
         # request = json.dumps(request.data) # Converts request.data from weirdness into a json string
-        searchParams = (json.loads(request)) # Converts json-like string to Python object
-        # searchParams = (json.loads(request.body)) # For Ty
+        # searchParams = (json.loads(request)) # Converts json-like string to Python object
+        searchParams = (json.loads(request.body)) # For Ty
         
         # We use one of these to load up the result variable to be sent in the Response
         mysearch = {}
