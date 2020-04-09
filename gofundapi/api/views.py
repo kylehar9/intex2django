@@ -245,7 +245,7 @@ class CampaignSearch(APIView):
             print("No searching performed.")
 
         
-        print("Searching finished.")
+        print("Done.")
 
 
         return Response({"my_search": mysearch})
