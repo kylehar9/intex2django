@@ -22,6 +22,7 @@ class Campaign(models.Model):
     social_share_total = models.IntegerField()
     is_charity = models.TextField()
     campaign_image_url = models.TextField(null=True)
+    score = models.DecimalField(max_digits=20, decimal_places=4, default=0)
 
     # ******Here they are sorted by datatype******
     # campaign_id = models.IntegerField(primary_key=True, editable=False)

@@ -55,6 +55,7 @@ def main():
         cam.social_share_total = c['social_share_total']
         cam.is_charity = c['is_charity']
         cam.campaign_image_url = c['campaign_image_url']
+        cam.score = c['score']
         cam.save()
 
 

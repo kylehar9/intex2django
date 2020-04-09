@@ -42,7 +42,8 @@ class OneCampaign(APIView):
             "campaign_hearts": theCampaign.campaign_hearts,
             "social_share_total": theCampaign.social_share_total,
             "is_charity": theCampaign.is_charity,
-            "campaign_image_url": theCampaign.campaign_image_url
+            "campaign_image_url": theCampaign.campaign_image_url,
+            "score": theCampaign.score
         }
 
 
@@ -113,6 +114,8 @@ class CampaignSearch(APIView):
         # We use one of these to load up the result variable to be sent in the Response
         mysearch = {}
         # mysearch = [] # As an array
+
+        order_by = ''
 
         # order_value = '' # Use later for ORDER BY, if specified
 
@@ -213,9 +216,14 @@ class CampaignSearch(APIView):
                 # mysearch.append(c.campaign_id) # For an array
                 mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
 
+        order_by = 'currencycode'
 
         else:
             print("Made it to else")
+
+        # if searchParams['lets_search'] and order_by:
+        #     print("Hello mai fren")
+
 
 
         
