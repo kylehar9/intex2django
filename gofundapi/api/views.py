@@ -15,6 +15,37 @@ def testInputView(request):
 # this view will pull up the submit html template
         return render(request, "index.html", {})
 
+class OneCampaign(APIView):
+    @csrf_exempt
+    def post(self, request, format=None):
+        campID = request.data['pid']
+        theCampaign = Campaign.objects.get(campaign_id=campID)
+        sent_campaign = {
+            "campaign_id": theCampaign.campaign_id,
+            "auto_fb_post_mode": theCampaign.auto_fb_post_mode,
+            "category_id": theCampaign.category_id,
+            "currencycode": theCampaign.currencycode,
+            "current_amount": theCampaign.current_amount,
+            "goal": theCampaign.goal,
+            "donators": theCampaign.donators,
+            "days_active": theCampaign.days_active,
+            "days_created": theCampaign.days_created,
+            "title": theCampaign.title,
+            "description": theCampaign.description,
+            "has_beneficiary": theCampaign.has_beneficiary,
+            "visible_in_search": theCampaign.visible_in_search,
+            "status": theCampaign.status,
+            "deactivated": theCampaign.deactivated,
+            "state": theCampaign.state,
+            "is_launched": theCampaign.is_launched,
+            "campaign_hearts": theCampaign.campaign_hearts,
+            "social_share_total": theCampaign.social_share_total,
+            "is_charity": theCampaign.is_charity
+        }
+
+
+        return Response(sent_campaign)
+
 class AzureCall(APIView):
     @csrf_exempt
     def post(self, request, format=None):
