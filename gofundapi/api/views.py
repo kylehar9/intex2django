@@ -18,7 +18,8 @@ def testInputView(request):
 class OneCampaign(APIView):
     @csrf_exempt
     def post(self, request, format=None):
-        campID = request.data['pid']
+        # campID = request.data['pid']
+        campID = json.loads(request.body)
         theCampaign = Campaign.objects.get(campaign_id=campID)
         sent_campaign = {
             "campaign_id": theCampaign.campaign_id,
@@ -41,6 +42,7 @@ class OneCampaign(APIView):
             "campaign_hearts": theCampaign.campaign_hearts,
             "social_share_total": theCampaign.social_share_total,
             "is_charity": theCampaign.is_charity
+            "campaign_image_url": theCampaign.campaign_image_url
         }
 
 
@@ -106,6 +108,7 @@ class CampaignSearch(APIView):
 
         # request = json.dumps(request.data) # Converts request.data from weirdness into a json string
         searchParams = (json.loads(request)) # Converts json-like string to Python object
+        # searchParams = (json.loads(request.body)) # For Ty
         
         # We use one of these to load up the result variable to be sent in the Response
         mysearch = {}

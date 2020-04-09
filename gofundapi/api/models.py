@@ -21,6 +21,7 @@ class Campaign(models.Model):
     campaign_hearts = models.IntegerField()
     social_share_total = models.IntegerField()
     is_charity = models.TextField()
+    campaign_image_url = models.TextField()
 
     # ******Here they are sorted by datatype******
     # campaign_id = models.IntegerField(primary_key=True, editable=False)
