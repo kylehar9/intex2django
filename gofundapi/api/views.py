@@ -71,9 +71,9 @@ class AzureCall(APIView):
 
 class CampaignSearch(APIView):
     @csrf_exempt
-    def get(self, request, format=None):
+    def post(self, request, format=None):
 
-        request = json.dumps(request.data) # Converts request.data from weirdness into a json string
+        # request = json.dumps(request.data) # Converts request.data from weirdness into a json string
         searchParams = (json.loads(request)) # Converts json-like string to Python object
         
         # We use one of these to load up the result variable to be sent in the Response
