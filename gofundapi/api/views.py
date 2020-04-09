@@ -46,7 +46,7 @@ class OneCampaign(APIView):
         }
 
 
-        return Response(sent_campaign)
+        return Response({"result": sent_campaign})
 
 class AzureCall(APIView):
     @csrf_exempt
