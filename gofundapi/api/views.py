@@ -132,12 +132,60 @@ class CampaignSearch(APIView):
                 # mysearch.append(c.campaign_id) # For an array
                 mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
 
+
+
+        #********************************************************
+        #**************Search a specific donators count**********
+        #********************************************************
+        elif searchParams['donators']:
+
+            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE donators = %s', [searchParams['donators']]):
+                # mysearch.append(c.campaign_id) # For an array
+                mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
+
+        #********************************************************
+        #**************Search donators range **********************
+        #********************************************************
+        elif searchParams['donators_max'] and searchParams['donators_min']:
+            # print(searchParams['goal_max'], searchParams['goal_min'])
+            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE donators < %s AND donators > %s', [searchParams['donators_max'], searchParams['donators_min']]):
+                # Load each Campaign into the Response that lies in this goal range
+                mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
+
+        #********************************************************
+        #**************Search a specific current_amount**********
+        #********************************************************
+        elif searchParams['current_amount']:
+
+            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE current_amount = %s', [searchParams['current_amount']]):
+                # mysearch.append(c.campaign_id) # For an array
+                mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
+
+        #********************************************************
+        #**************Search current_amount range **************
+        #********************************************************
+        elif searchParams['current_amount_max'] and searchParams['current_amount_min']:
+            # print(searchParams['goal_max'], searchParams['goal_min'])
+            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE current_amount < %s AND current_amount > %s', [searchParams['current_amount_max'], searchParams['current_amount_min']]):
+                # Load each Campaign into the Response that lies in this goal range
+                mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
+
+        #********************************************************
+        #**************Search a currencycode ********************
+        #********************************************************
+        elif searchParams['currencycode']:
+
+            for c in Campaign.objects.raw('SELECT * FROM api_campaign WHERE currencycode = %s', [searchParams['currencycode']]):
+                # mysearch.append(c.campaign_id) # For an array
+                mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
+
+
         else:
             print("Made it to else")
 
-        print("Finished")
 
         
+        print("Finished")
 
 
         return Response({"my_search": mysearch})
