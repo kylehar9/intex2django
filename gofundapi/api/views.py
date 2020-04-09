@@ -242,10 +242,10 @@ class CampaignSearch(APIView):
                     mysearch[c.campaign_id] = {"campaign_id": c.campaign_id, "title": c.title, "goal": c.goal, "score": c.score, "donators": c.donators, "current_amount": c.current_amount, "currencycode": c.currencycode, "campaign_hearts": c.campaign_hearts, "days_active": c.days_active} # For an object
 
         else:
-            print("Made it to else")
+            print("No searching performed.")
 
         
-        print("Finished")
+        print("Searching finished.")
 
 
         return Response({"my_search": mysearch})
