@@ -16,10 +16,16 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
 from api.views import testInputView # import view here  routes start with the app not project name
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    # url(r'results/', resultsView, name='resultsView'),
+    path('', include('client.urls')),
 ]
+
+
+
+

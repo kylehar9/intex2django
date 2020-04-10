@@ -6,7 +6,7 @@ from api import views
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    # path('', views.index, name='index'),
     path('test', views.testInputView, name='testInputView'),
     path('results', views.AzureCall.as_view()),
     path('search', views.CampaignSearch.as_view()),
